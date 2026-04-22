@@ -146,7 +146,7 @@ void LoadData(FileInfo& Info){
 
             uint8_t* NewData = new uint8_t[NewSize];
             memcpy(NewData, CompressedData.data(), NewSize);
-            delete data;
+            delete[] data;
 
             // Now update the dictionary and load the data
             DInfoH.DataOffset = Offset;
@@ -321,9 +321,9 @@ void ExportData(FileInfo& Info){
     writeFile("./" + (Info.Name + ".inst"), OutputData, TotalSize);
 
     // Free all used memory
-    delete OutputData;
+    delete[] OutputData;
     for(uint8_t* Data : Info.Datas){
-        delete Data;
+        delete[] Data;
     }
 
     return;
